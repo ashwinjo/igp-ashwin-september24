@@ -1,3 +1,3 @@
-FROM iamdevopstrainer/tomcat:base
+FROM tomcat:8.5.49
 COPY target/ABCtechnologies-1.0.war /usr/local/tomcat/webapps/
 CMD ["catalina.sh", "run"]
