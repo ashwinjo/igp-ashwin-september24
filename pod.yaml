@@ -9,6 +9,8 @@ spec:
   containers:
   - image: ashjo317/igp-devops
     name: igpabctechnologiesapp
+    ports:
+    - 8085
     resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Always
