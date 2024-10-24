@@ -9,6 +9,6 @@ spec:
   selector:
     run: igpabctechnologiesapp  # This should match the pod's label
   ports:
-    - port: 8085                 # The port that will be exposed by the service
-      targetPort: 8085           # The port on the pod that the service will forward traffic to
+    - port: 8080                 # The port that will be exposed by the service
+      targetPort: 8080           # The port on the pod that the service will forward traffic to
       nodePort: 30001            # The port on each node that will forward to the service (optional)
