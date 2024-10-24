@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Pod
 metadata:
@@ -10,7 +11,7 @@ spec:
   - image: ashjo317/igp-devops
     name: igpabctechnologiesapp
     ports:
-    - 8085
+        - containerPort: 8080
     resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Always
