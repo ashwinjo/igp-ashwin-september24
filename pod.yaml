@@ -6,6 +6,7 @@ metadata:
   labels:
     run: igpabctechnologiesapp
   name: igpabctechnologiesapp
+  namespace: default
 spec:
   containers:
   - image: ashjo317/igp-devops
