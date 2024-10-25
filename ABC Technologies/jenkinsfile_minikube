@@ -1,0 +1,110 @@
+pipeline
+{
+	agent any
+	stages
+	{
+		stage('Code Checkout from SCM')
+		{
+			steps
+			{
+				git branch: 'main', url:'https://github.com/ashwinjo/igp-ashwin-september24.git'
+			}
+		}
+		
+		stage('Code Compile Maven')
+		{
+			steps
+			{
+                dir('ABC Technologies') {
+                    sh '/opt/maven/bin/mvn compile'
+                }
+            }
+		}
+
+		stage('Code Test Maven')
+		{
+			steps
+			{
+                dir('ABC Technologies') {
+                    sh '/opt/maven/bin/mvn test'
+                }
+            }
+		}
+
+		stage('Code Packaging Maven')
+		{
+			steps
+			{
+                dir('ABC Technologies') {
+                    sh '/opt/maven/bin/mvn package'
+                }
+            }
+		}
+		
+		stage('Docker Build')
+		{
+			steps
+			{
+                dir('ABC Technologies') {
+                    withDockerRegistry(url: '', credentialsId: 'docker-hub-creds') {
+                        sh 'docker build -t igpabctech:$BUILD_NUMBER . -f Dockerfile'
+                        sh 'docker tag igpabctech:$BUILD_NUMBER ashjo317/igp-devops:$BUILD_NUMBER'
+                    }
+                }
+            }
+		}
+		stage('Docker Push')
+		{
+			steps
+			{
+                dir('ABC Technologies') {
+                    withDockerRegistry(url: '', credentialsId: 'docker-hub-creds') {
+                        sh 'docker push ashjo317/igp-devops:$BUILD_NUMBER'
+                    }
+                }
+            }
+		}
+		stage('Docker Run')
+		{
+			steps
+			{
+                dir('ABC Technologies') {
+                    withDockerRegistry(url: '', credentialsId: 'docker-hub-creds') {
+                        sh 'docker rm -v -f $(docker ps -a -q) || true'
+                        sh 'docker run --name ABCTechapp -itd -p 8084:8080 ashjo317/igp-devops:$BUILD_NUMBER'
+                    }
+                }
+            }
+		}
+		stage('Kubernetes install minikube')
+		{
+			steps
+			{
+			    sh 'minikube delete'
+			    sh 'minikube start'
+			    sh 'kubectl create serviceaccount default -n default'
+                
+            }
+		}
+		stage('Kubernetes Deploy Pod NodePort Service')
+		{
+			steps
+			{
+			    sh 'minikube status'
+                sh 'kubectl apply -f service.yaml'
+                sh 'kubectl apply -f pod.yaml'
+                
+            }
+		}
+		stage('Show the nodes and pods')
+		{
+			steps
+			{
+			    sh 'minikube status'
+                sh 'kubectl -n default get pods'
+                sh 'kubectl -n default get nodes -o wide'
+                
+            }
+		}
+   }
+}
