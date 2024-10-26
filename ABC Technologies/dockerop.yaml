@@ -7,9 +7,9 @@
       community.docker.docker_image:
         name: igpabctech # Name of the image
         source: build
-        tag: $BUILD_NUMBER   # Tag for the image
+        tag: latest   # Tag for the image
         build:
-          path: Dockerfile  # Path to the directory containing Dockerfile
+          path: .  # Path to the directory containing Dockerfile
         push: false  # Set to true if you want to push immediately after building
 
     - name: Tag Docker image
@@ -17,10 +17,10 @@
         name: igpabctech:$BUILD_NUMBER  # Source image
         source: tag
         repository: ashjo317/igp-devops  # Target repository (Docker Hub or private registry)
-        tag: $BUILD_NUMBER  # New tag to apply
+        tag: latest  # New tag to apply
 
     - name: Push Docker image to registry
       community.docker.docker_image:
-        name: ashjo317/igp-devops:$BUILD_NUMBER  # Full name of the image to push
+        name: ashjo317/igp-devops:latest  # Full name of the image to push
         source: push
         push: true  # Push the image to the repository
