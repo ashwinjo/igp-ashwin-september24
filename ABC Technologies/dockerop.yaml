@@ -20,7 +20,6 @@
         tag: latest  # New tag to apply
     - name: Log in to Docker registry
       docker_login:
-        registry: ashjo317/igp-devops
         username: ashjo317
         password: Himesh123!
 
