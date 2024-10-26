@@ -3,10 +3,6 @@
   hosts: docker_hosts
   become: true
   tasks:
-    - name: Log into DockerHub
-      community.docker.docker_login:
-      username: ashjo317
-      password: Himesh123!
     - name: Build Docker image
       community.docker.docker_image:
         name: igpabctech # Name of the image
