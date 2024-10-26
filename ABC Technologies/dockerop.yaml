@@ -21,7 +21,7 @@
         
     - name: Log in to Docker registry
       docker_login:
-        username: ashjo317
+        username: "{{ansible_user}}"
         password: "{{ansible_password}}"
 
     - name: Push Docker image to registry
