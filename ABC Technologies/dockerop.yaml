@@ -14,7 +14,7 @@
 
     - name: Tag Docker image
       community.docker.docker_image:
-        name: igpabctech:$BUILD_NUMBER  # Source image
+        name: igpabctech:latest  # Source image
         source: local
         repository: ashjo317/igp-devops  # Target repository (Docker Hub or private registry)
         tag: latest  # New tag to apply
