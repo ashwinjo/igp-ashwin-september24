@@ -18,10 +18,11 @@
         source: local
         repository: ashjo317/igp-devops  # Target repository (Docker Hub or private registry)
         tag: latest  # New tag to apply
+        
     - name: Log in to Docker registry
       docker_login:
         username: ashjo317
-        password: Himesh123!
+        password: "{{ansible_password}}"
 
     - name: Push Docker image to registry
       community.docker.docker_image:
