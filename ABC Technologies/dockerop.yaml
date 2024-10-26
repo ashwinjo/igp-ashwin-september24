@@ -22,5 +22,5 @@
     - name: Push Docker image to registry
       community.docker.docker_image:
         name: ashjo317/igp-devops:latest  # Full name of the image to push
-        source: push
+        source: local
         push: true  # Push the image to the repository
