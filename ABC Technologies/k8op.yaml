@@ -1,0 +1,19 @@
+- name: Deploy Application on Kubernetes Cluster
+  hosts: hosts
+  become: true
+  tasks:
+    - name: Deploy application - Deployment
+      command: kubectl apply -f deployment.yaml
+      register: deployment_result
+
+    - name: Deploy application - Service
+      command: kubectl apply -f service.yaml
+      register: service_result
+
+    - name: Display Deployment Result
+      debug:
+        var: deployment_result.stdout
+
+    - name: Display Service Result
+      debug:
+        var: service_result.stdout
