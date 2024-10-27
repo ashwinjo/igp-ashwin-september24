@@ -1,5 +1,5 @@
 - name: Deploy Application on Kubernetes Cluster
-  hosts: hosts
+  hosts: kubernetes_hosts
   become: true
   tasks:
     - name: Deploy application - Deployment
