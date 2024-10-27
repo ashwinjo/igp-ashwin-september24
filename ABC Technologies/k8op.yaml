@@ -11,7 +11,7 @@
         var: dir_contents.stdout_lines
     
     - name: Deploy application - Deployment
-      command: kubectl apply -f "/var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/k8deployment.yaml"
+      command: kubectl apply -f "/var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/k8deployment.yaml" --validate=false
       register: deployment_result
 
     - name: Display Deployment Result
