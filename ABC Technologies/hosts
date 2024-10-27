@@ -1,2 +1,5 @@
 [docker_hosts]
 172.31.28.32 ansible_user=ubuntu
+
+[kubernetes_hosts]
+172.31.28.32 ansible_user=ubuntu
