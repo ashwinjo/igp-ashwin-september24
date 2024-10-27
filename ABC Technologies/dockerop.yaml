@@ -22,7 +22,7 @@
     - name: Log in to Docker registry
       docker_login:
         username: "ashjo317"
-        password: "{{ docker_pass }}
+        password: "{{ docker_pass }}"
 
     - name: Push Docker image to registry
       community.docker.docker_image:
