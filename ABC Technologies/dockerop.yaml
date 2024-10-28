@@ -16,7 +16,7 @@
       community.docker.docker_image:
         name: igpabctech:latest  # Source image
         source: local
-        repository: ashjo317/igp-devops  # Target repository (Docker Hub or private registry)
+        repository: ashjo317/igp-devops
         tag: latest  # New tag to apply
         
     - name: Log in to Docker registry
@@ -29,3 +29,19 @@
         name: ashjo317/igp-devops:latest  # Full name of the image to push
         source: local
         push: true  # Push the image to the repository
+
+    - name: Pull Docker image
+      community.docker.docker_image:
+        name: ashjo317/igp-devops
+        tag: latest
+        source: pull
+      become: true
+
+    - name: Run Docker container
+      community.docker.docker_container:
+        name: abctechdockerapp
+        image: ashjo317/igp-devops:latest
+        state: started
+        ports:
+          - "8085:8080"
+      become: true
