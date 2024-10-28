@@ -3,7 +3,7 @@
   hosts: localhost
   gather_facts: yes
   vars:
-     kubeconfig_file: '~/.kube/config'
+     kubeconfig_file: '/var/lib/jenkins/kubeconfig'
   tasks:
     - name: Create a namespace
       kubernetes.core.k8s:
