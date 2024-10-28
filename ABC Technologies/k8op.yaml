@@ -1,20 +1,22 @@
 ---
-- name: Deploy Application on Kubernetes Cluster
-  hosts: kubernetes_hosts
-  become: true
+- name: Manage Kubernetes deployments
+  hosts: localhost
+  gather_facts: yes
+  vars:
+     kubeconfig_file: '~/.kube/config'
   tasks:
-    - name: List files in the directory where the playbook is running
-      command: ls
-      register: dir_contents
+    - name: Create a namespace
+      kubernetes.core.k8s:
+        kubeconfig: "{{ kubeconfig_file }}"
+        name: jenkinskube
+        api_version: v1
+        kind: Namespace
+        state: present
 
-    - name: Display directory contents
-      debug:
-        var: dir_contents.stdout_lines
-    
-    - name: Deploy application - Deployment
-      command: kubectl apply -f "/var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/k8deployment.yaml" --validate=false
-      register: deployment_result
-
-    - name: Display Deployment Result
-      debug:
-        var: deployment_result.stdout
+    - name: Deploy an application
+      kubernetes.core.k8s:
+        state: present
+        kubeconfig: "{{ kubeconfig_file }}"
+        namespace: jenkinskube
+        state: present
+        src: k8deployment.yaml
