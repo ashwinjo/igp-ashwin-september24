@@ -1,0 +1,266 @@
+Started by user Ashwin Joshi
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $DOCKER_PASS or $ANS_PASS or $ANS_PASS_PSW
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Code Checkout from SCM)
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/ashwinjo/igp-ashwin-september24.git # timeout=10
+Fetching upstream changes from https://github.com/ashwinjo/igp-ashwin-september24.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/ashwinjo/igp-ashwin-september24.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision be7e9beace7a138f94889a8538138cbb9656061f (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f be7e9beace7a138f94889a8538138cbb9656061f # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D main # timeout=10
+ > git checkout -b main be7e9beace7a138f94889a8538138cbb9656061f # timeout=10
+Commit message: "Update k8op.yaml"
+ > git rev-list --no-walk be7e9beace7a138f94889a8538138cbb9656061f # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Code Compile Maven)
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies
+[Pipeline] {
+[Pipeline] sh
++ mvn compile
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m----------------------< [0;36mcom.abc:ABCtechnologies[0;1m >-----------------------[m
+[[1;34mINFO[m] [1mBuilding RetailModule 1.0[m
+[[1;34mINFO[m] [1m--------------------------------[ war ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mjacoco-maven-plugin:0.8.6:prepare-agent[m [1m(jacoco-initialize)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] argLine set to "-javaagent:/var/lib/jenkins/.m2/repository/org/jacoco/org.jacoco.agent/0.8.6/org.jacoco.agent-0.8.6-runtime.jar=destfile=/var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/target/jacoco.exec"
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:resources[m [1m(default-resources)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] skip non existing resourceDirectory /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/src/main/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.1:compile[m [1m(default-compile)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  1.179 s
+[[1;34mINFO[m] Finished at: 2024-10-28T17:19:47Z
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Code Test Maven)
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies
+[Pipeline] {
+[Pipeline] sh
++ mvn test
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m----------------------< [0;36mcom.abc:ABCtechnologies[0;1m >-----------------------[m
+[[1;34mINFO[m] [1mBuilding RetailModule 1.0[m
+[[1;34mINFO[m] [1m--------------------------------[ war ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mjacoco-maven-plugin:0.8.6:prepare-agent[m [1m(jacoco-initialize)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] argLine set to "-javaagent:/var/lib/jenkins/.m2/repository/org/jacoco/org.jacoco.agent/0.8.6/org.jacoco.agent-0.8.6-runtime.jar=destfile=/var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/target/jacoco.exec"
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:resources[m [1m(default-resources)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] skip non existing resourceDirectory /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/src/main/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.1:compile[m [1m(default-compile)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:testResources[m [1m(default-testResources)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] skip non existing resourceDirectory /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.1:testCompile[m [1m(default-testCompile)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:2.12.4:test[m [1m(default-test)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] Surefire report directory: /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.abc.dataAccessObject.ProductImpTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.051 sec
+
+Results :
+
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  2.007 s
+[[1;34mINFO[m] Finished at: 2024-10-28T17:19:50Z
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Code Packaging Maven)
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies
+[Pipeline] {
+[Pipeline] sh
++ mvn package
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m----------------------< [0;36mcom.abc:ABCtechnologies[0;1m >-----------------------[m
+[[1;34mINFO[m] [1mBuilding RetailModule 1.0[m
+[[1;34mINFO[m] [1m--------------------------------[ war ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mjacoco-maven-plugin:0.8.6:prepare-agent[m [1m(jacoco-initialize)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] argLine set to "-javaagent:/var/lib/jenkins/.m2/repository/org/jacoco/org.jacoco.agent/0.8.6/org.jacoco.agent-0.8.6-runtime.jar=destfile=/var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/target/jacoco.exec"
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:resources[m [1m(default-resources)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] skip non existing resourceDirectory /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/src/main/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.1:compile[m [1m(default-compile)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:testResources[m [1m(default-testResources)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] skip non existing resourceDirectory /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.1:testCompile[m [1m(default-testCompile)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:2.12.4:test[m [1m(default-test)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] Surefire report directory: /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.abc.dataAccessObject.ProductImpTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.037 sec
+
+Results :
+
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-war-plugin:3.2.2:war[m [1m(default-war)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] Packaging webapp
+[[1;34mINFO[m] Assembling webapp [ABCtechnologies] in [/var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/target/ABCtechnologies-1.0]
+[[1;34mINFO[m] Processing war project
+[[1;34mINFO[m] Copying webapp resources [/var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/src/main/webapp]
+[[1;34mINFO[m] Webapp assembled in [78 msecs]
+[[1;34mINFO[m] Building war: /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/target/ABCtechnologies-1.0.war
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mjacoco-maven-plugin:0.8.6:report[m [1m(jacoco-site)[m @ [36mABCtechnologies[0;1m ---[m
+[[1;34mINFO[m] Loading execution data file /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/target/jacoco.exec
+[[1;34mINFO[m] Analyzed bundle 'RetailModule' with 2 classes
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  3.012 s
+[[1;34mINFO[m] Finished at: 2024-10-28T17:19:55Z
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Run Ansible Playbook to build, tag and push docker to dockerhub)
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] ansiblePlaybook
+Warning: A secret was passed to "ansiblePlaybook" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [DOCKER_PASS]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
+[ABC Technologies] $ /usr/bin/ansible-playbook dockerop.yaml -i ansiblehosts.inv --private-key "/var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/ssh14493246504439965746.key" -u ubuntu -e ********
+
+PLAY [Build, tag, and push Docker image] ***************************************
+
+TASK [Gathering Facts] *********************************************************
+[WARNING]: Platform linux on host 172.31.28.32 is using the discovered Python
+interpreter at /usr/bin/python3.12, but future installation of another Python
+interpreter could change the meaning of that path. See
+https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [172.31.28.32]
+
+TASK [Build Docker image] ******************************************************
+ok: [172.31.28.32]
+
+TASK [Tag Docker image] ********************************************************
+ok: [172.31.28.32]
+
+TASK [Log in to Docker registry] ***********************************************
+ok: [172.31.28.32]
+
+TASK [Push Docker image to registry] *******************************************
+ok: [172.31.28.32]
+
+PLAY RECAP *********************************************************************
+172.31.28.32               : ok=5    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy Docker Image to Kubernetes Cluster)
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] ansiblePlaybook
+[ABC Technologies] $ /usr/bin/ansible-playbook k8op.yaml -i ansiblehosts.inv --private-key "/var/lib/jenkins/workspace/ci-cd-igp-pipeline-with-ansible/ABC Technologies/ssh10698871816682988475.key" -u ubuntu
+[WARNING]: While constructing a mapping from /var/lib/jenkins/workspace/ci-cd-
+igp-pipeline-with-ansible/ABC Technologies/k8op.yaml, line 18, column 9, found
+a duplicate dict key (state). Using last defined value only.
+
+PLAY [Manage Kubernetes deployments] *******************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [Create a namespace] ******************************************************
+[WARNING]: kubernetes<24.2.0 is not supported or tested. Some features may not
+work.
+changed: [localhost]
+
+TASK [Deploy an application] ***************************************************
+changed: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
