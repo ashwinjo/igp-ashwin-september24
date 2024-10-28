@@ -1,0 +1,63 @@
+pipeline
+{
+	agent any
+	environment {
+        DOCKER_PASS = credentials('docker-registry-password')
+    }
+	stages
+	{
+		stage('Code Checkout from SCM')
+		{
+			steps
+			{
+				git branch: 'main', url:'https://github.com/ashwinjo/igp-ashwin-september24.git'
+			}
+		}
+		
+		stage('Code Compile Maven')
+		{
+			steps
+			{
+                dir('ABC Technologies') {
+                    sh 'mvn compile'
+                }
+            }
+		}
+
+		stage('Code Test Maven')
+		{
+			steps
+			{
+                dir('ABC Technologies') {
+                    sh 'mvn test'
+                }
+            }
+		}
+
+		stage('Code Packaging Maven')
+		{
+			steps
+			{
+                dir('ABC Technologies') {
+                    sh 'mvn package'
+                }
+            }
+		}
+		stage('Run Ansible PLaybook')
+		{
+			steps
+			{
+                dir('ABC Technologies') {
+                    script {
+                    ansiblePlaybook credentialsId: 'agent-id-jenkins-controller', disableHostKeyChecking: true, installation: 'ansible', inventory: 'ansiblehosts.inv', playbook: 'dockerop.yaml', vaultTmpPath: '',
+                    extraVars: [
+                        docker_pass: "${env.DOCKER_PASS}"
+                    ]
+                        
+                    }
+                }
+    		            
+            }
+        }
+   }
+}
