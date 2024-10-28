@@ -1,6 +1,6 @@
 ---
 - name: Build, tag, and push Docker image
-  hosts: docker_hosts
+  hosts: localhost
   become: true
   tasks:
     - name: Build Docker image
