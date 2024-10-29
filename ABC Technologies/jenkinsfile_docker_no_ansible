@@ -46,10 +46,8 @@ pipeline
 			steps
 			{
                 dir('ABC Technologies') {
-                    withDockerRegistry(url: '', credentialsId: 'docker-hub-creds') {
                         sh 'docker build -t igpabctech:$BUILD_NUMBER . -f Dockerfile'
                         sh 'docker tag igpabctech:$BUILD_NUMBER ashjo317/igp-devops:$BUILD_NUMBER'
-                    }
                 }
             }
 		}
@@ -69,10 +67,8 @@ pipeline
 			steps
 			{
                 dir('ABC Technologies') {
-                    withDockerRegistry(url: '', credentialsId: 'docker-hub-creds') {
                         sh 'docker rm -v -f $(docker ps -a -q) || true'
                         sh 'docker run --name ABCTechapp -itd -p 8084:8080 ashjo317/igp-devops:$BUILD_NUMBER'
-                    }
                 }
             }
 		}
@@ -91,9 +87,8 @@ pipeline
 			steps
 			{
 			    sh 'minikube status'
-                sh 'kubectl apply -f service.yaml'
                 sh 'kubectl apply -f pod.yaml'
-                
+                sh 'kubectl apply -f service.yaml'
             }
 		}
 		stage('Show the nodes and pods')
